@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Modern color palette */
+  --background: 220 25% 6%;
+  --foreground: 220 10% 98%;
+  --card: 220 25% 8%;
+  --card-foreground: 220 10% 98%;
+  --popover: 220 25% 8%;
+  --popover-foreground: 220 10% 98%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 220 10% 98%;
+  --secondary: 220 15% 15%;
+  --secondary-foreground: 220 10% 98%;
+  --muted: 220 15% 15%;
+  --muted-foreground: 220 10% 65%;
+  --accent: 220 15% 15%;
+  --accent-foreground: 220 10% 98%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 220 10% 98%;
+  --border: 220 15% 20%;
+  --input: 220 15% 20%;
+  --ring: 262 83% 58%;
+  --radius: 0.75rem;
+
+  /* Glassmorphism colors */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(262, 83%, 68%));
+  --gradient-secondary: linear-gradient(135deg, hsl(220, 25%, 8%), hsl(220, 25%, 12%));
+  --gradient-success: linear-gradient(135deg, hsl(142, 76%, 36%), hsl(142, 76%, 46%));
+  --gradient-error: linear-gradient(135deg, hsl(0, 62%, 50%), hsl(0, 62%, 60%));
+  
+  /* Animations */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
+}
+
+.glass-card {
+  @apply glass rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20;
+}
+
+.glass-button {
+  @apply glass rounded-xl px-6 py-3 font-medium transition-all duration-300 hover:bg-white/10 hover:scale-105;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out;
+}
+
+/* Background patterns */
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, hsl(262, 83%, 58%, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, hsl(262, 83%, 68%, 0.1) 0%, transparent 50%);
+}
+
+/* Progress bar styles */
+.progress-glow {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+}
+
+/* Button variants */
+.btn-primary {
+  background: var(--gradient-primary);
+  @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30;
+}
+
+.btn-success {
+  background: var(--gradient-success);
+  @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/30;
+}
+
+.btn-error {
+  background: var(--gradient-error);
+  @apply text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/30;
+}
+
+/* Quiz specific styles */
+.question-card {
+  @apply glass-card hover:border-primary/30 transition-all duration-300;
+}
+
+.answer-option {
+  @apply glass rounded-lg p-4 cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-primary/50;
+}
+
+.answer-option.selected {
+  @apply border-primary bg-primary/20;
+}
+
+.answer-option.correct {
+  @apply border-green-500 bg-green-500/20;
+}
+
+.answer-option.incorrect {
+  @apply border-red-500 bg-red-500/20;
+}
+
+/* Leaderboard styles */
+.leaderboard-item {
+  @apply glass-card hover:scale-105 transition-all duration-300;
+}
+
+.rank-badge {
+  @apply w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm;
+}
+
+.rank-1 {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  @apply text-yellow-900;
+}
+
+.rank-2 {
+  background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+  @apply text-gray-700;
+}
+
+.rank-3 {
+  background: linear-gradient(135deg, #cd7f32, #daa520);
+  @apply text-orange-900;
+}
+
+/* Achievement badges */
+.achievement-badge {
+  @apply glass-card text-center hover:scale-105 transition-all duration-300;
+}
+
+.achievement-earned {
+  @apply border-yellow-500 bg-yellow-500/20;
+}
+
+/* Admin dashboard styles */
+.admin-card {
+  @apply glass-card hover:border-primary/40 transition-all duration-300;
+}
+
+.stat-card {
+  @apply glass-card text-center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .glass-card {
+    @apply p-4;
+  }
+  
+  .btn-primary, .btn-success, .btn-error {
+    @apply py-2 px-4 text-sm;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 83% 58%;
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  body {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 50%, #cbd5e0 100%);
+  }
+}
